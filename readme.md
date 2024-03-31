@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project serves as a storage for files and folders, while building a fullstack NextJS application. It includes instructions for setting up the project environment and resolving initial database creation issues.
+This project serves as a storage for media files like images, videos,etc, while building a fullstack NextJS application. It includes instructions for setting up the project environment and resolving initial database creation issues.
 
 ## Requirements
 
