@@ -6,20 +6,20 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
 # Install system dependencies
-RUN apk add --no-cache netcat-openbsd postgresql-client
+RUN apk add --no-cache netcat-openbsd postgresql-client gcc musl-dev libffi-dev
 
+# Upgrade pip
 RUN pip install --upgrade pip
 
+# Install Python dependencies
 COPY ./requirements.txt /app/requirements.txt
-
 RUN pip install -r requirements.txt
 
-COPY ./entrypoint.sh /app/entrypoint.sh
-RUN chmod +x /app/entrypoint.sh
-
+# Copy app files and entrypoint script
 COPY . .
 
-RUN mkdir -p media/uploads
+# Move entrypoint outside of app volume
+COPY ./entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
-ENTRYPOINT ["/app/entrypoint.sh"]
-
+ENTRYPOINT ["/entrypoint.sh"]

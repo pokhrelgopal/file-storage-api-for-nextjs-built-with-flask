@@ -1,363 +1,453 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MediaMaster API - File Storage Service</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-    <link href="https://fonts.bunny.net/css?family=lexend:200,300,400,500,600,700,800" rel="stylesheet" />
-    <style>
-        body { font-family: 'Lexend', sans-serif; }
-        .hero-section { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
-        .code-block { background: #f8f9fa; border-left: 4px solid #007bff; }
-        .endpoint-card { transition: transform 0.2s; }
-        .endpoint-card:hover { transform: translateY(-2px); }
-        .method-badge { font-weight: 600; }
-    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Lexend', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body>
 
-<!-- Hero Section -->
-<section class="hero-section py-5">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-8">
-                <h1 class="display-4 fw-bold mb-3">
-                    <span class="material-symbols-outlined me-3" style="font-size: 3rem; vertical-align: middle;">cloud_upload</span>
-                    MediaMaster API
-                </h1>
-                <p class="lead mb-4">
-                    Secure, fast, and reliable file storage API. Upload, manage, and serve your media files with ease.
-                    Perfect for developers building applications that need robust file storage capabilities.
-                </p>
-                <div class="d-flex gap-3 mb-4">
-                    <span class="badge bg-light text-dark px-3 py-2">RESTful API</span>
-                    <span class="badge bg-light text-dark px-3 py-2">API Key Authentication</span>
-                    <span class="badge bg-light text-dark px-3 py-2">Multiple File Formats</span>
-                    <span class="badge bg-light text-dark px-3 py-2">100MB Max Size</span>
+<body class="font-sans text-gray-900 bg-gray-50">
+
+    <!-- Hero Section -->
+    <section class="bg-white border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-6 py-16 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-primary-500 rounded-lg flex items-center justify-center mr-4">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12">
+                                </path>
+                            </svg>
+                        </div>
+                        <h1 class="text-4xl font-bold text-gray-900">MediaMaster API</h1>
+                    </div>
+                    <p class="text-xl text-gray-600 mb-8 leading-relaxed">
+                        Secure, fast, and reliable file storage API. Upload, manage, and serve your media files with
+                        ease.
+                        Perfect for developers building applications that need robust file storage capabilities.
+                    </p>
+                    <div class="flex flex-wrap gap-3 mb-8">
+                        <span class="px-3 py-1 bg-primary-50 text-primary-700 rounded-full text-sm font-medium">RESTful
+                            API</span>
+                        <span class="px-3 py-1 bg-primary-50 text-primary-700 rounded-full text-sm font-medium">API Key
+                            Auth</span>
+                        <span class="px-3 py-1 bg-primary-50 text-primary-700 rounded-full text-sm font-medium">Multiple
+                            Formats</span>
+                        <span class="px-3 py-1 bg-primary-50 text-primary-700 rounded-full text-sm font-medium">100MB
+                            Max</span>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-4 text-center">
-                <div class="card bg-white bg-opacity-10 border-0">
-                    <div class="card-body">
-                        <h5 class="text-white mb-3">Quick Start</h5>
-                        <div class="text-start">
-                            <small class="text-white-50 d-block mb-2">Base URL:</small>
-                            <code class="text-warning">{{ request.host_url }}</code>
-                            <small class="text-white-50 d-block mt-3 mb-2">API Key:</small>
-                            <code class="text-warning">mediamaster-dev-key-12345</code>
+                <div class="bg-gray-900 rounded-2xl p-6 text-white">
+                    <h3 class="text-lg font-semibold mb-4">Quick Start</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <p class="text-gray-400 text-sm mb-1">Base URL:</p>
+                            <code
+                                class="text-green-400 bg-gray-800 px-2 py-1 rounded text-sm">{{ request.host_url }}</code>
+                        </div>
+                        <div>
+                            <p class="text-gray-400 text-sm mb-1">API Key:</p>
+                            <code
+                                class="text-green-400 bg-gray-800 px-2 py-1 rounded text-sm">mediamaster-dev-key-12345</code>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- API Documentation -->
-<section class="py-5">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8">
-                <h2 class="mb-4">API Endpoints</h2>
-                
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-6 py-12 lg:px-8">
+        <div class="grid lg:grid-cols-3 gap-12">
+
+            <!-- API Endpoints -->
+            <div class="lg:col-span-2">
+                <h2 class="text-3xl font-bold text-gray-900 mb-8">API Endpoints</h2>
+
                 <!-- Upload File -->
-                <div class="card endpoint-card mb-4 border-0 shadow-sm">
-                    <div class="card-header bg-success text-white">
-                        <h5 class="mb-0">
-                            <span class="method-badge badge bg-light text-success me-2">POST</span>
-                            /file
-                        </h5>
-                    </div>
-                    <div class="card-body">
-                        <p class="mb-3"><strong>Upload a media file</strong></p>
-                        
-                        <h6>Headers</h6>
-                        <div class="code-block p-3 mb-3">
-                            <code>X-API-Key: mediamaster-dev-key-12345</code><br>
-                            <code>Content-Type: multipart/form-data</code>
+                <div class="bg-white rounded-xl border border-gray-200 mb-8 overflow-hidden">
+                    <div class="bg-green-50 border-b border-green-200 px-6 py-4">
+                        <div class="flex items-center">
+                            <span
+                                class="bg-green-100 text-green-800 px-3 py-1 rounded-lg text-sm font-semibold mr-3">POST</span>
+                            <h3 class="text-lg font-semibold text-gray-900">/file</h3>
                         </div>
-                        
-                        <h6>Parameters</h6>
-                        <ul>
-                            <li><code>file</code> (required) - The file to upload</li>
-                        </ul>
-                        
-                        <h6>Supported Formats</h6>
-                        <p><span class="badge bg-secondary me-1">PNG</span> <span class="badge bg-secondary me-1">JPG</span> <span class="badge bg-secondary me-1">JPEG</span> <span class="badge bg-secondary me-1">WEBP</span> <span class="badge bg-secondary me-1">GIF</span> <span class="badge bg-secondary me-1">MP4</span> <span class="badge bg-secondary me-1">AVI</span> <span class="badge bg-secondary me-1">MOV</span> <span class="badge bg-secondary me-1">MKV</span> <span class="badge bg-secondary me-1">WEBM</span></p>
-                        
-                        <details>
-                            <summary class="btn btn-outline-primary btn-sm">Show Example</summary>
-                            <div class="mt-3">
-                                <h6>cURL</h6>
-                                <div class="code-block p-3">
-                                    <code>curl -X POST {{ request.host_url }}file \<br>
-  -H "X-API-Key: mediamaster-dev-key-12345" \<br>
-  -F "file=@image.jpg"</code>
-                                </div>
-                                
-                                <h6 class="mt-3">JavaScript</h6>
-                                <div class="code-block p-3">
-                                    <code>const formData = new FormData();<br>
-formData.append('file', fileInput.files[0]);<br><br>
-fetch('{{ request.host_url }}file', {<br>
-  method: 'POST',<br>
-  headers: {<br>
-    'X-API-Key': 'mediamaster-dev-key-12345'<br>
-  },<br>
-  body: formData<br>
-})<br>
-.then(response => response.json())<br>
-.then(data => console.log(data));</code>
-                                </div>
-                                
-                                <h6 class="mt-3">Response</h6>
-                                <div class="code-block p-3">
-                                    <code>{<br>
-  "success": true,<br>
-  "message": "File uploaded successfully",<br>
-  "file": {<br>
-    "id": 1,<br>
-    "filename": "abc123_image.jpg",<br>
-    "original_filename": "image.jpg",<br>
-    "file_size": 1048576,<br>
-    "file_size_mb": 1.0,<br>
-    "file_type": "image/jpeg",<br>
-    "file_extension": "jpg",<br>
-    "image_url": "{{ request.host_url }}media/uploads/abc123_image.jpg",<br>
-    "upload_date": "2025-01-15T10:30:00",<br>
-    "is_active": true<br>
-  }<br>
-}</code>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-700 mb-6">Upload a media file to the storage service</p>
+
+                        <div class="space-y-6">
+                            <div>
+                                <h4 class="font-semibold text-gray-900 mb-3">Headers</h4>
+                                <div class="bg-gray-50 rounded-lg p-4 text-sm font-mono">
+                                    <div class="text-gray-800">X-API-Key: mediamaster-dev-key-12345</div>
+                                    <div class="text-gray-800">Content-Type: multipart/form-data</div>
                                 </div>
                             </div>
-                        </details>
+
+                            <div>
+                                <h4 class="font-semibold text-gray-900 mb-3">Parameters</h4>
+                                <ul class="text-gray-700">
+                                    <li><code class="bg-gray-100 px-2 py-1 rounded text-sm">file</code> (required) - The
+                                        file to upload</li>
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h4 class="font-semibold text-gray-900 mb-3">Supported Formats</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-2 py-1 bg-gray-100 text-gray-700 rounded text-sm">PNG</span>
+                                    <span class="px-2 py-1 bg-gray-100 text-gray-700 rounded text-sm">JPG</span>
+                                    <span class="px-2 py-1 bg-gray-100 text-gray-700 rounded text-sm">JPEG</span>
+                                    <span class="px-2 py-1 bg-gray-100 text-gray-700 rounded text-sm">WEBP</span>
+                                    <span class="px-2 py-1 bg-gray-100 text-gray-700 rounded text-sm">GIF</span>
+                                    <span class="px-2 py-1 bg-gray-100 text-gray-700 rounded text-sm">MP4</span>
+                                    <span class="px-2 py-1 bg-gray-100 text-gray-700 rounded text-sm">AVI</span>
+                                    <span class="px-2 py-1 bg-gray-100 text-gray-700 rounded text-sm">MOV</span>
+                                    <span class="px-2 py-1 bg-gray-100 text-gray-700 rounded text-sm">MKV</span>
+                                    <span class="px-2 py-1 bg-gray-100 text-gray-700 rounded text-sm">WEBM</span>
+                                </div>
+                            </div>
+
+                            <details class="group">
+                                <summary
+                                    class="cursor-pointer bg-primary-50 text-primary-700 px-4 py-2 rounded-lg inline-block text-sm font-medium hover:bg-primary-100 transition-colors">
+                                    Show Example</summary>
+                                <div class="mt-4 space-y-4">
+                                    <div>
+                                        <h5 class="font-medium text-gray-900 mb-2">cURL</h5>
+                                        <div
+                                            class="bg-gray-900 text-gray-100 p-4 rounded-lg text-sm font-mono overflow-x-auto">
+                                            <div>curl -X POST {{ request.host_url }}file \</div>
+                                            <div>&nbsp;&nbsp;-H "X-API-Key: mediamaster-dev-key-12345" \</div>
+                                            <div>&nbsp;&nbsp;-F "file=@image.jpg"</div>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <h5 class="font-medium text-gray-900 mb-2">JavaScript</h5>
+                                        <div
+                                            class="bg-gray-900 text-gray-100 p-4 rounded-lg text-sm font-mono overflow-x-auto">
+                                            <div>const formData = new FormData();</div>
+                                            <div>formData.append('file', fileInput.files[0]);</div>
+                                            <div class="mt-2">fetch('{{ request.host_url }}file', {</div>
+                                            <div>&nbsp;&nbsp;method: 'POST',</div>
+                                            <div>&nbsp;&nbsp;headers: { 'X-API-Key': 'mediamaster-dev-key-12345' },
+                                            </div>
+                                            <div>&nbsp;&nbsp;body: formData</div>
+                                            <div>})</div>
+                                            <div>.then(response => response.json())</div>
+                                            <div>.then(data => console.log(data));</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
                     </div>
                 </div>
 
                 <!-- List Files -->
-                <div class="card endpoint-card mb-4 border-0 shadow-sm">
-                    <div class="card-header bg-info text-white">
-                        <h5 class="mb-0">
-                            <span class="method-badge badge bg-light text-info me-2">GET</span>
-                            /files
-                        </h5>
-                    </div>
-                    <div class="card-body">
-                        <p class="mb-3"><strong>Get a list of uploaded files</strong></p>
-                        
-                        <h6>Headers</h6>
-                        <div class="code-block p-3 mb-3">
-                            <code>X-API-Key: mediamaster-dev-key-12345</code>
+                <div class="bg-white rounded-xl border border-gray-200 mb-8 overflow-hidden">
+                    <div class="bg-blue-50 border-b border-blue-200 px-6 py-4">
+                        <div class="flex items-center">
+                            <span
+                                class="bg-blue-100 text-blue-800 px-3 py-1 rounded-lg text-sm font-semibold mr-3">GET</span>
+                            <h3 class="text-lg font-semibold text-gray-900">/files</h3>
                         </div>
-                        
-                        <h6>Query Parameters</h6>
-                        <ul>
-                            <li><code>page</code> (optional) - Page number (default: 1)</li>
-                            <li><code>per_page</code> (optional) - Items per page (default: 20, max: 100)</li>
-                        </ul>
-                        
-                        <details>
-                            <summary class="btn btn-outline-primary btn-sm">Show Example</summary>
-                            <div class="mt-3">
-                                <h6>cURL</h6>
-                                <div class="code-block p-3">
-                                    <code>curl -X GET "{{ request.host_url }}files?page=1&per_page=10" \<br>
-  -H "X-API-Key: mediamaster-dev-key-12345"</code>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-700 mb-6">Get a paginated list of uploaded files</p>
+
+                        <div class="space-y-6">
+                            <div>
+                                <h4 class="font-semibold text-gray-900 mb-3">Headers</h4>
+                                <div class="bg-gray-50 rounded-lg p-4 text-sm font-mono">
+                                    <div class="text-gray-800">X-API-Key: mediamaster-dev-key-12345</div>
                                 </div>
                             </div>
-                        </details>
+
+                            <div>
+                                <h4 class="font-semibold text-gray-900 mb-3">Query Parameters</h4>
+                                <ul class="text-gray-700 space-y-1">
+                                    <li><code class="bg-gray-100 px-2 py-1 rounded text-sm">page</code> (optional) -
+                                        Page number (default: 1)</li>
+                                    <li><code class="bg-gray-100 px-2 py-1 rounded text-sm">per_page</code> (optional) -
+                                        Items per page (default: 20, max: 100)</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Get File Info -->
-                <div class="card endpoint-card mb-4 border-0 shadow-sm">
-                    <div class="card-header bg-info text-white">
-                        <h5 class="mb-0">
-                            <span class="method-badge badge bg-light text-info me-2">GET</span>
-                            /file/{id}/info
-                        </h5>
-                    </div>
-                    <div class="card-body">
-                        <p class="mb-3"><strong>Get information about a specific file</strong></p>
-                        
-                        <h6>Headers</h6>
-                        <div class="code-block p-3 mb-3">
-                            <code>X-API-Key: mediamaster-dev-key-12345</code>
+                <div class="bg-white rounded-xl border border-gray-200 mb-8 overflow-hidden">
+                    <div class="bg-blue-50 border-b border-blue-200 px-6 py-4">
+                        <div class="flex items-center">
+                            <span
+                                class="bg-blue-100 text-blue-800 px-3 py-1 rounded-lg text-sm font-semibold mr-3">GET</span>
+                            <h3 class="text-lg font-semibold text-gray-900">/file/{id}/info</h3>
                         </div>
-                        
-                        <h6>Path Parameters</h6>
-                        <ul>
-                            <li><code>id</code> (required) - File ID</li>
-                        </ul>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-700 mb-6">Get detailed information about a specific file</p>
+
+                        <div class="space-y-6">
+                            <div>
+                                <h4 class="font-semibold text-gray-900 mb-3">Headers</h4>
+                                <div class="bg-gray-50 rounded-lg p-4 text-sm font-mono">
+                                    <div class="text-gray-800">X-API-Key: mediamaster-dev-key-12345</div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h4 class="font-semibold text-gray-900 mb-3">Path Parameters</h4>
+                                <ul class="text-gray-700">
+                                    <li><code class="bg-gray-100 px-2 py-1 rounded text-sm">id</code> (required) - File
+                                        ID</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Delete File -->
-                <div class="card endpoint-card mb-4 border-0 shadow-sm">
-                    <div class="card-header bg-danger text-white">
-                        <h5 class="mb-0">
-                            <span class="method-badge badge bg-light text-danger me-2">DELETE</span>
-                            /file/{id}
-                        </h5>
-                    </div>
-                    <div class="card-body">
-                        <p class="mb-3"><strong>Delete a file (soft delete)</strong></p>
-                        
-                        <h6>Headers</h6>
-                        <div class="code-block p-3 mb-3">
-                            <code>X-API-Key: mediamaster-dev-key-12345</code>
+                <div class="bg-white rounded-xl border border-gray-200 mb-8 overflow-hidden">
+                    <div class="bg-red-50 border-b border-red-200 px-6 py-4">
+                        <div class="flex items-center">
+                            <span
+                                class="bg-red-100 text-red-800 px-3 py-1 rounded-lg text-sm font-semibold mr-3">DELETE</span>
+                            <h3 class="text-lg font-semibold text-gray-900">/file/{id}</h3>
                         </div>
-                        
-                        <h6>Path Parameters</h6>
-                        <ul>
-                            <li><code>id</code> (required) - File ID</li>
-                        </ul>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-700 mb-6">Delete a file (soft delete - marks as inactive)</p>
+
+                        <div class="space-y-6">
+                            <div>
+                                <h4 class="font-semibold text-gray-900 mb-3">Headers</h4>
+                                <div class="bg-gray-50 rounded-lg p-4 text-sm font-mono">
+                                    <div class="text-gray-800">X-API-Key: mediamaster-dev-key-12345</div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h4 class="font-semibold text-gray-900 mb-3">Path Parameters</h4>
+                                <ul class="text-gray-700">
+                                    <li><code class="bg-gray-100 px-2 py-1 rounded text-sm">id</code> (required) - File
+                                        ID</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Serve Media -->
-                <div class="card endpoint-card mb-4 border-0 shadow-sm">
-                    <div class="card-header bg-secondary text-white">
-                        <h5 class="mb-0">
-                            <span class="method-badge badge bg-light text-secondary me-2">GET</span>
-                            /media/uploads/{filename}
-                        </h5>
+                <div class="bg-white rounded-xl border border-gray-200 mb-8 overflow-hidden">
+                    <div class="bg-gray-50 border-b border-gray-200 px-6 py-4">
+                        <div class="flex items-center">
+                            <span
+                                class="bg-gray-100 text-gray-800 px-3 py-1 rounded-lg text-sm font-semibold mr-3">GET</span>
+                            <h3 class="text-lg font-semibold text-gray-900">/media/uploads/{filename}</h3>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <p class="mb-3"><strong>Serve uploaded media files (No API key required)</strong></p>
-                        
-                        <h6>Path Parameters</h6>
-                        <ul>
-                            <li><code>filename</code> (required) - The filename to serve</li>
-                        </ul>
+                    <div class="p-6">
+                        <p class="text-gray-700 mb-6">Serve uploaded media files (No API key required)</p>
+
+                        <div>
+                            <h4 class="font-semibold text-gray-900 mb-3">Path Parameters</h4>
+                            <ul class="text-gray-700">
+                                <li><code class="bg-gray-100 px-2 py-1 rounded text-sm">filename</code> (required) - The
+                                    filename to serve</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Health Check -->
-                <div class="card endpoint-card mb-4 border-0 shadow-sm">
-                    <div class="card-header bg-success text-white">
-                        <h5 class="mb-0">
-                            <span class="method-badge badge bg-light text-success me-2">GET</span>
-                            /health
-                        </h5>
+                <div class="bg-white rounded-xl border border-gray-200 mb-8 overflow-hidden">
+                    <div class="bg-green-50 border-b border-green-200 px-6 py-4">
+                        <div class="flex items-center">
+                            <span
+                                class="bg-green-100 text-green-800 px-3 py-1 rounded-lg text-sm font-semibold mr-3">GET</span>
+                            <h3 class="text-lg font-semibold text-gray-900">/health</h3>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <p class="mb-3"><strong>Health check endpoint (No API key required)</strong></p>
-                        <p>Returns service status and timestamp</p>
+                    <div class="p-6">
+                        <p class="text-gray-700 mb-4">Health check endpoint (No API key required)</p>
+                        <p class="text-gray-600">Returns service status and timestamp</p>
                     </div>
                 </div>
             </div>
 
             <!-- Sidebar -->
-            <div class="col-lg-4">
-                <!-- API Key Info -->
-                <div class="card border-0 shadow-sm mb-4">
-                    <div class="card-header bg-warning text-dark">
-                        <h6 class="mb-0">
-                            <span class="material-symbols-outlined me-2">key</span>
-                            Authentication
-                        </h6>
-                    </div>
-                    <div class="card-body">
-                        <p class="small mb-3">All API endpoints (except health check and media serving) require authentication using an API key.</p>
-                        
-                        <h6>How to use:</h6>
-                        <ol class="small">
-                            <li>Include the API key in the request header</li>
-                            <li>Header name: <code>X-API-Key</code></li>
-                            <li>Development key: <code>mediamaster-dev-key-12345</code></li>
-                        </ol>
-                        
-                        <div class="alert alert-warning small mt-3 mb-0">
-                            <strong>Note:</strong> Change the API key in production environment via the <code>API_KEY</code> environment variable.
-                        </div>
-                    </div>
-                </div>
+            <div class="lg:col-span-1">
+                <div class="sticky top-8 space-y-6">
 
-                <!-- Status Codes -->
-                <div class="card border-0 shadow-sm mb-4">
-                    <div class="card-header bg-info text-white">
-                        <h6 class="mb-0">
-                            <span class="material-symbols-outlined me-2">info</span>
-                            Response Codes
-                        </h6>
-                    </div>
-                    <div class="card-body">
-                        <div class="small">
-                            <div class="d-flex justify-content-between mb-2">
-                                <span class="badge bg-success">200</span>
-                                <span>Success</span>
+                    <!-- Authentication -->
+                    <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+                        <div class="bg-yellow-50 border-b border-yellow-200 px-6 py-4">
+                            <div class="flex items-center">
+                                <svg class="w-5 h-5 text-yellow-600 mr-2" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z">
+                                    </path>
+                                </svg>
+                                <h3 class="font-semibold text-gray-900">Authentication</h3>
                             </div>
-                            <div class="d-flex justify-content-between mb-2">
-                                <span class="badge bg-success">201</span>
-                                <span>Created</span>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-gray-700 text-sm mb-4">All API endpoints (except health check and media
+                                serving) require authentication using an API key.</p>
+
+                            <div class="space-y-3">
+                                <h4 class="font-medium text-gray-900">How to use:</h4>
+                                <ol class="text-sm text-gray-700 space-y-1 pl-4">
+                                    <li>1. Include the API key in the request header</li>
+                                    <li>2. Header name: <code class="bg-gray-100 px-1 rounded">X-API-Key</code></li>
+                                    <li>3. Development key: <code
+                                            class="bg-gray-100 px-1 rounded text-xs">mediamaster-dev-key-12345</code>
+                                    </li>
+                                </ol>
                             </div>
-                            <div class="d-flex justify-content-between mb-2">
-                                <span class="badge bg-warning text-dark">400</span>
-                                <span>Bad Request</span>
-                            </div>
-                            <div class="d-flex justify-content-between mb-2">
-                                <span class="badge bg-danger">401</span>
-                                <span>Unauthorized</span>
-                            </div>
-                            <div class="d-flex justify-content-between mb-2">
-                                <span class="badge bg-danger">404</span>
-                                <span>Not Found</span>
-                            </div>
-                            <div class="d-flex justify-content-between mb-2">
-                                <span class="badge bg-danger">413</span>
-                                <span>File Too Large</span>
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <span class="badge bg-danger">500</span>
-                                <span>Server Error</span>
+
+                            <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-3 mt-4">
+                                <p class="text-sm text-yellow-800">
+                                    <strong>Note:</strong> Change the API key in production environment via the <code
+                                        class="bg-yellow-100 px-1 rounded">API_KEY</code> environment variable.
+                                </p>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Limits -->
-                <div class="card border-0 shadow-sm">
-                    <div class="card-header bg-secondary text-white">
-                        <h6 class="mb-0">
-                            <span class="material-symbols-outlined me-2">rule</span>
-                            Limits & Rules
-                        </h6>
+                    <!-- Response Codes -->
+                    <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+                        <div class="bg-blue-50 border-b border-blue-200 px-6 py-4">
+                            <div class="flex items-center">
+                                <svg class="w-5 h-5 text-blue-600 mr-2" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                <h3 class="font-semibold text-gray-900">Response Codes</h3>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="space-y-3 text-sm">
+                                <div class="flex justify-between items-center">
+                                    <span class="bg-green-100 text-green-800 px-2 py-1 rounded font-medium">200</span>
+                                    <span class="text-gray-700">Success</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="bg-green-100 text-green-800 px-2 py-1 rounded font-medium">201</span>
+                                    <span class="text-gray-700">Created</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded font-medium">400</span>
+                                    <span class="text-gray-700">Bad Request</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="bg-red-100 text-red-800 px-2 py-1 rounded font-medium">401</span>
+                                    <span class="text-gray-700">Unauthorized</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="bg-red-100 text-red-800 px-2 py-1 rounded font-medium">404</span>
+                                    <span class="text-gray-700">Not Found</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="bg-red-100 text-red-800 px-2 py-1 rounded font-medium">413</span>
+                                    <span class="text-gray-700">File Too Large</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="bg-red-100 text-red-800 px-2 py-1 rounded font-medium">500</span>
+                                    <span class="text-gray-700">Server Error</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <ul class="small mb-0">
-                            <li><strong>Max file size:</strong> 100MB</li>
-                            <li><strong>Supported formats:</strong> Images (PNG, JPG, JPEG, WEBP, GIF) and Videos (MP4, AVI, MOV, MKV, WEBM)</li>
-                            <li><strong>File naming:</strong> Files are automatically renamed with secure random prefixes</li>
-                            <li><strong>Storage:</strong> Soft delete - files are marked as inactive but not physically removed</li>
-                        </ul>
+
+                    <!-- Limits & Rules -->
+                    <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+                        <div class="bg-gray-50 border-b border-gray-200 px-6 py-4">
+                            <div class="flex items-center">
+                                <svg class="w-5 h-5 text-gray-600 mr-2" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                <h3 class="font-semibold text-gray-900">Limits & Rules</h3>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <ul class="space-y-3 text-sm text-gray-700">
+                                <li class="flex items-start">
+                                    <span class="font-medium text-gray-900 mr-2">Max file size:</span>
+                                    <span>100MB</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="font-medium text-gray-900 mr-2">Supported formats:</span>
+                                    <span>Images (PNG, JPG, JPEG, WEBP, GIF) and Videos (MP4, AVI, MOV, MKV,
+                                        WEBM)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="font-medium text-gray-900 mr-2">File naming:</span>
+                                    <span>Files are automatically renamed with secure random prefixes</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="font-medium text-gray-900 mr-2">Storage:</span>
+                                    <span>Soft delete - files are marked as inactive but not physically removed</span>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</section>
 
-<!-- Footer -->
-<footer class="bg-dark text-white py-4">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <h6>MediaMaster API</h6>
-                <p class="small mb-0">Secure file storage service for developers</p>
-            </div>
-            <div class="col-md-6 text-md-end">
-                <p class="small mb-0">
-                    <span class="material-symbols-outlined me-1" style="font-size: 1rem; vertical-align: middle;">code</span>
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 mt-16">
+        <div class="max-w-7xl mx-auto px-6 py-8 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <h3 class="font-semibold text-gray-900">MediaMaster API</h3>
+                    <p class="text-gray-600 text-sm">Secure file storage service for developers</p>
+                </div>
+                <div class="flex items-center text-gray-600 text-sm">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                    </svg>
                     Built with Flask & SQLite
-                </p>
+                </div>
             </div>
         </div>
-    </div>
-</footer>
+    </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

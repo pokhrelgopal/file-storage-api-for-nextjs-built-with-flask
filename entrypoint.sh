@@ -10,13 +10,13 @@ echo "Database is ready!"
 # Create upload directory
 mkdir -p media/uploads
 
-# Initialize database if migrations directory doesn't exist
+# Initialize database migrations if not already initialized
 if [ ! -d "migrations" ]; then
     echo "Initializing database migrations..."
     flask db init
 fi
 
-# Apply Database Migrations
+# Apply migrations
 echo "Applying database migrations..."
 flask db migrate -m "Auto migration"
 flask db upgrade
