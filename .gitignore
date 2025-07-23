@@ -1,3 +1,14 @@
 db
 venv
 migrations
+instance/
+*.db
+*.sqlite
+*.sqlite3
+.env
+logs/
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
+.vscode/
